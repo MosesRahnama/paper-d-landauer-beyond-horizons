@@ -1,0 +1,25 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+missfont.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Archive of old versions
+archive/
+
+# Editor
+*.swp
+*.swo
+*~
