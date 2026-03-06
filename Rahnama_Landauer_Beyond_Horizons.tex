@@ -17,6 +17,9 @@
 
 \DeclareMathAlphabet{\mathscr}{OMS}{cmsy}{m}{n}
 
+\newcommand{\RLs}{\mathcal{R}_L^{\mathrm{stat}}}
+\newcommand{\RLd}{\mathcal{R}_L^{\mathrm{diff}}}
+
 \makeatletter
 \def\@email#1#2{%
  \endgroup
@@ -34,8 +37,7 @@
 \begin{document}
 
 \title{The Landauer Saturation Diagnostic for Non-Gravitational Systems:\\
-QCD Confinement, the Casimir Effect,\\
-and a Storage-Dimension Theorem}
+QCD Confinement and the Casimir Effect}
 
 \author{Moses Rahnama}
 \email{moses@minaanalytics.com}
@@ -45,36 +47,31 @@ and a Storage-Dimension Theorem}
 
 \begin{abstract}
 We define the static Landauer ratio
-$\mathcal{R}_L \equiv U/(T S)$, the total internal energy of a
-thermodynamic system divided by its entropy-weighted temperature,
-and compute it for two non-gravitational systems with complete
-thermodynamic decompositions.
+$\RLs \equiv U/(T S)$, the Euler homogeneity factor of the
+equation of state, and compute it for two non-gravitational systems
+with complete thermodynamic decompositions.
 For QCD flux tubes, using lattice data from Kaczmarek and Zantow
-($N_f = 2$, $T_c = 200$~MeV), we find $\mathcal{R}_L > 1$ at all
-sampled temperatures, with a minimum $\mathcal{R}_L \approx 1.17$
+($N_f = 2$, $T_c = 200$~MeV), we find $\RLs > 1$ at all
+sampled temperatures, with a minimum $\RLs \approx 1.17$
 at the deconfinement transition and
-$\mathcal{R}_L \approx 2.16$ in deep confinement.
+$\RLs \approx 2.16$ in deep confinement.
 For the thermal Casimir effect between perfect conductors, the
-high-temperature limit gives $\mathcal{R}_L \to 0$ (purely entropic
+high-temperature limit gives $\RLs \to 0$ (purely entropic
 free energy).
 Applying the same definition to gravitational systems, the
-Schwarzschild black hole gives $\mathcal{R}_L = 2$ exactly
-(via the Smarr relation $Mc^2 = 2\,T_H S_{BH}$), placing it in the
-same thermodynamic family as QCD confinement.
-The cosmological apparent horizon gives $\mathcal{R}_L = 1$ (via the
+Schwarzschild black hole gives $\RLs = 2$ exactly
+(via the Smarr relation $Mc^2 = 2\,T_H S_{BH}$), while the
+cosmological apparent horizon gives $\RLs = 1$ (via the
 Misner--Sharp energy $E_{MS} = T S$).
 These results define a three-regime classification:
-super-Landauer ($\mathcal{R}_L \geq 2$, black holes and QCD
-confinement), Landauer-saturating ($\mathcal{R}_L = 1$,
-cosmological expansion), and sub-Landauer ($\mathcal{R}_L < 1$,
+super-Landauer ($\RLs > 1$, black holes and QCD
+confinement), Landauer-saturating ($\RLs = 1$,
+cosmological expansion), and sub-Landauer ($\RLs < 1$,
 high-temperature Casimir).
-We state a storage-dimension scaling argument: if classical
-information is stored on a $d$-dimensional manifold embedded in
-three-dimensional space, the resulting Landauer maintenance-cost
-potential yields a force law $F \sim r^{d-2}$; $d = 0$ reproduces
-the inverse-square law (gravity, electrostatics), $d = 1$ reproduces
-confinement (constant force), and $d = 2$ gives a linear restoring
-force.
+We note the standard potential-theory result that a
+$d$-dimensional source distribution produces a force $F \sim r^{d-2}$,
+which the Landauer framing interprets thermodynamically but does not
+derive.
 All numerical claims are verified by a companion simulation with
 70 falsifiable checks across 8 groups.
 \end{abstract}
@@ -109,12 +106,21 @@ system.  A more useful diagnostic for static systems is the
 \emph{static Landauer ratio}
 \begin{equation}
 \label{eq:RL_def}
-\mathcal{R}_L \;\equiv\; \frac{U}{T\,S},
+\RLs \;\equiv\; \frac{U}{T\,S},
 \end{equation}
 which compares the total internal energy to the total
-entropy-weighted temperature.  This is the ratio of the energy
-actually stored to the Landauer cost of the system's total
-information content.
+entropy-weighted temperature.  For any system whose internal energy
+is a homogeneous function of entropy of degree~$n$ (at fixed
+extensive variables), Euler's theorem gives $U = n\,T\,S$, so
+$\mathcal{R}_L^{\mathrm{stat}} = n$.  The static ratio is therefore
+the Euler homogeneity degree of the equation of
+state~\cite{Callen1985,KastorRayTraschen2009}.  We adopt the name
+``Landauer ratio''
+because $T\,S = N_{\mathrm{bits}}\,k_B T \ln 2$ equals the total
+Landauer maintenance cost of the system's information content, but
+the diagnostic itself is a standard thermodynamic quantity whose
+value can be read off from the equation of state without invoking
+information theory.
 
 Applied to gravitational systems, the static ratio gives different
 values from the differential one.  For a Schwarzschild black hole,
@@ -128,7 +134,7 @@ For the cosmological apparent horizon, the Misner--Sharp energy
 satisfies $E_{MS} = T\,S$, giving
 $\mathcal{R}_L^{\mathrm{cosmo}} = 1$.
 
-Here we compute $\mathcal{R}_L$ for two non-gravitational
+Here we compute $\RLs$ for two non-gravitational
 systems where complete thermodynamic decompositions (free energy,
 internal energy, entropy) are available from first principles or
 lattice data:
@@ -141,18 +147,15 @@ between perfectly conducting plates at finite
 temperature~\cite{Casimir1948,Lifshitz1956}.
 \end{enumerate}
 
-We also state a \emph{storage-dimension scaling argument} that
-connects the dimensionality of information storage to the resulting
-force law, providing a geometric organizing principle for the
-$\mathcal{R}_L$ classification.
-
-The paper is organized as follows.  Section~\ref{sec:storage_dim}
-presents the storage-dimension scaling argument.
-Section~\ref{sec:qcd} applies $\mathcal{R}_L$ to QCD flux tubes.
+The paper is organized as follows.
+Section~\ref{sec:storage_dim} recalls the standard
+potential-theory correspondence between source dimension and force law.
+Section~\ref{sec:qcd} applies $\mathcal{R}_L^{\mathrm{stat}}$ to
+QCD flux tubes.
 Section~\ref{sec:casimir} treats the thermal Casimir effect.
 Section~\ref{sec:classification} presents the unified classification.
-Section~\ref{sec:string_tension} connects the framework to the QCD
-string tension.
+Section~\ref{sec:string_tension} illustrates the framework with a
+dimensional-analysis estimate of the QCD string tension.
 Section~\ref{sec:perturbative} analyzes the perturbative high-$T$
 limit.
 Section~\ref{sec:scope} states what we do and do not claim.
@@ -160,67 +163,30 @@ Section~\ref{sec:conclusion} concludes.
 
 
 % ============================================================
-\section{Storage-dimension scaling argument}
+\section{Storage-dimension observation}
 \label{sec:storage_dim}
 
-\begin{proposition}[Storage dimension and force law]
-\label{prop:storage_dim}
-Let a source maintain $N$ bits of classical information stored on a
-$d$-dimensional manifold $\mathcal{M}_d$ embedded in
-three-dimensional Euclidean space.  If the Landauer maintenance cost
-per bit is $k_B T \ln 2$ and the information density on
-$\mathcal{M}_d$ scales with its natural measure, then the
-maintenance-cost potential at distance $r$ from the source satisfies
-\begin{equation}
-\label{eq:phi_scaling}
-\Phi_d(r) \;\sim\; r^{d-1} \quad (d \geq 1), \qquad
-\Phi_0(r) \;\sim\; r^{-1},
-\end{equation}
-and the associated radial force scales as
-\begin{equation}
-\label{eq:force_scaling}
-F_d(r) = -\frac{d\Phi_d}{dr} \;\sim\; r^{d-2}.
-\end{equation}
-\end{proposition}
-
-\noindent
-\textit{Argument.}
-The two cases have different physical setups and boundary conditions.
-
-For $d \geq 1$ (extended storage), the information is distributed
-along the manifold $\mathcal{M}_d$.  The information measure in a
-radial shell of thickness $dr$ scales as $r^{d-1}$, so the
-cumulative maintenance-cost potential is
-\begin{equation}
-\Phi_d(r) = k_B T \ln 2 \int_0^r \rho_d(r')\,dr'
-\sim r^d.
-\end{equation}
-The force $F_d = -d\Phi_d/dr \sim r^{d-1}$, giving exponent $d - 2$
-for $d \geq 1$ (constant for $d = 1$, linear for $d = 2$).
-
-For $d = 0$ (localized source broadcasting onto enclosing spheres),
-the information density per unit area at distance $r$ is
-$\rho_0(r) \sim 1/r^2$, and the potential energy of a test charge
-at distance $r$ from the source is
-$\Phi_0(r) \sim \int_r^\infty \rho_0(r')\,dr' \sim 1/r$.
-The force $F_0 = -d\Phi_0/dr \sim 1/r^2$, giving exponent $-2$.
-
-In both cases the force-law exponent is $d - 2$.
-\hfill $\square$
-
-\medskip
-
-The proposition is a classification tool, not a derivation of
-coupling constants.  It organizes the observation that the three
-known force-law forms correspond to three storage dimensions:
+It is a standard result of potential theory that a source distributed
+on a $d$-dimensional manifold in three-dimensional space produces a
+potential $\Phi \sim r^{d-1}$ (for $d \geq 1$) or $\Phi \sim 1/r$
+(for a point source, $d = 0$), giving a radial force
+$F \sim r^{d-2}$ in all cases.  This is Gauss's law applied to
+different source geometries; the word ``information'' adds no
+dynamical content.  In the Landauer framing, the maintenance cost
+$k_B T \ln 2$ per bit replaces the generic source strength, but the
+force-law exponent is fixed entirely by the geometry.
+Table~\ref{tab:storage_dim} collects the correspondence:
+$d = 0$ gives the inverse-square law (gravity, electrostatics),
+$d = 1$ gives a constant force (QCD confinement), and $d = 2$ gives
+a linear restoring force.
 
 \begin{table}[b]
 \centering
-\caption{Storage dimension and force law.}
+\caption{Source dimension and force law (standard potential theory).}
 \label{tab:storage_dim}
 \begin{tabular}{@{}clll@{}}
 \toprule
-$d$ & Storage geometry & $\Phi(r)$ & Force law \\
+$d$ & Source geometry & $\Phi(r)$ & Force law \\
 \midrule
 0 & Point / holographic & $\sim 1/r$ & $\sim 1/r^2$ \\
 1 & Line (flux tube)    & $\sim r$   & $\sim$ const \\
@@ -229,17 +195,9 @@ $d$ & Storage geometry & $\Phi(r)$ & Force law \\
 \end{tabular}
 \end{table}
 
-The $d = 0$ case reproduces the inverse-square law shared by
-Newtonian gravity and Coulomb electrostatics.  The $d = 1$ case
-reproduces the constant-force (linear potential) characteristic of QCD
-confinement.  The $d = 2$ case yields a linear restoring force
-(harmonic potential), which does not correspond to a fundamental
-interaction but arises in effective descriptions such as quark--hadron
-duality at intermediate distances.
-
 
 % ============================================================
-\section{QCD flux tubes: \texorpdfstring{$\mathcal{R}_L$}{RL} from lattice data}
+\section{QCD flux tubes: \texorpdfstring{$\RLs$}{RL-stat} from lattice data}
 \label{sec:qcd}
 
 \subsection{Setup}
@@ -264,7 +222,9 @@ The static Landauer ratio for this system is
 We use the data from Table~I of Ref.~\cite{KZ2005a}:
 $S_{\infty}(T)$ (dimensionless) and $U_{\infty}(T)/T_c$
 (dimensionless) at 16 temperatures spanning $0.79 \leq T/T_c \leq 2.99$.
-Table~\ref{tab:qcd_rl} presents the computed $\mathcal{R}_L$.
+Table~\ref{tab:qcd_rl} presents the computed $\RLs$.
+The $F_{\infty}/T_c$ column is not independent data; it is computed
+from $F_{\infty} = U_{\infty} - T\,S_{\infty}$.
 
 \begin{table}[t]
 \centering
@@ -275,7 +235,7 @@ $T_c = 200$~MeV.  $N_{\mathrm{bits}} = S_{\infty}/\ln 2$.}
 \begin{tabular}{@{}rrrrrr@{}}
 \toprule
 $T/T_c$ & $S_{\infty}$ & $U_{\infty}/T_c$ & $N_{\mathrm{bits}}$ &
-$F_{\infty}/T_c$ & $\mathcal{R}_L$ \\
+$F_{\infty}/T_c$ & $\RLs$ \\
 \midrule
 0.79 &  5.48 &  9.37 &  7.91 & 5.04 & 2.164 \\
 0.84 &  6.49 & 10.19 &  9.36 & 4.74 & 1.868 \\
@@ -302,23 +262,27 @@ $F_{\infty}/T_c$ & $\mathcal{R}_L$ \\
 Three features stand out:
 
 \begin{enumerate}
-\item \textbf{$\mathcal{R}_L > 1$ everywhere.}
+\item \textbf{$\RLs > 1$ everywhere.}
 At all sampled temperatures, the internal energy exceeds the Landauer
 floor.  The QCD flux tube is \emph{super-Landauer}: it stores more
 energy per unit information than the thermodynamic minimum.
 
 \item \textbf{Minimum at $T_c$.}
-$\mathcal{R}_L$ reaches its minimum value $\approx 1.17$ at
+$\RLs$ reaches its minimum value $\approx 1.17$ at
 $T/T_c \approx 1.04$, coinciding with the deconfinement phase
 transition.  The entropy also peaks near $T_c$
 ($N_{\mathrm{bits}} \approx 23.6$ at $T/T_c = 0.98$), reflecting the
 maximal liberation of color degrees of freedom.
 
 \item \textbf{Deep confinement approaches the black hole value.}
-At $T/T_c = 0.79$, $\mathcal{R}_L \approx 2.16$.  This is close to
-the Schwarzschild value $\mathcal{R}_L = 2$ (Eq.~\ref{eq:RL_BH}),
-placing deep QCD confinement in the same thermodynamic family as
-black holes.
+At $T/T_c = 0.79$, $\RLs \approx 2.16$.  This is within $\sim 8\%$
+of the Schwarzschild value $\RLs = 2$ (Eq.~\ref{eq:RL_BH}).
+The BH value is exact (from holographic scaling), while the QCD value
+is a lattice result at $N_f = 2$ with heavier-than-physical pion
+masses, so the numerical proximity should be treated with caution:
+it could shift with physical quark masses or improved lattice data.
+Nonetheless, both systems share the structural feature of confining
+information behind a boundary.
 \end{enumerate}
 
 The free energy $F_{\infty}$ is positive below $T_c$ and decreasing
@@ -329,13 +293,13 @@ while above $T_c$ color screening reduces the separation cost.
 \subsection{Physical interpretation}
 
 The deconfinement transition is the point where the QCD system most
-closely approaches $\mathcal{R}_L = 1$.  At $T_c$, the system
+closely approaches $\RLs = 1$.  At $T_c$, the system
 undergoes a reorganization of its information-storage structure from
 one-dimensional (flux tube, $d=1$) to zero-dimensional (screened,
 quasi-pointlike color charges, $d=0$).
 
-The proximity of QCD deep confinement ($\mathcal{R}_L \approx 2.16$)
-to the Schwarzschild black hole ($\mathcal{R}_L = 2$) is striking.
+The proximity of QCD deep confinement ($\RLs \approx 2.16$)
+to the Schwarzschild black hole ($\RLs = 2$) is striking.
 Both systems confine information behind a boundary (the horizon for
 gravity, the flux tube for color) and both store roughly twice the
 Landauer minimum energy per bit of confined information.  The Smarr
@@ -347,7 +311,7 @@ overhead of maintaining the chromoelectric string.
 
 
 % ============================================================
-\section{Thermal Casimir effect: \texorpdfstring{$\mathcal{R}_L$}{RL} in the entropic regime}
+\section{Thermal Casimir effect: \texorpdfstring{$\RLs$}{RL} in the entropic regime}
 \label{sec:casimir}
 
 \subsection{Setup}
@@ -366,7 +330,7 @@ At $T = 0$, the Casimir energy is purely quantum mechanical:
 \begin{equation}
 \frac{F_0}{A} = -\frac{\pi^2 \hbar c}{720\, a^3}.
 \end{equation}
-The entropy vanishes ($S = 0$), so $F = U = F_0$ and $\mathcal{R}_L$
+The entropy vanishes ($S = 0$), so $F = U = F_0$ and $\RLs$
 is undefined (no information content to erase).
 
 \subsection{High-temperature (classical) limit}
@@ -404,10 +368,10 @@ the plates.
 This makes the Casimir effect the thermodynamic opposite of QCD
 confinement and black holes:
 \begin{itemize}
-\item \textbf{QCD and BH}: $\mathcal{R}_L \approx 2$.  Internal
+\item \textbf{QCD and BH}: $\RLs \approx 2$.  Internal
 energy dominates.  The confining system stores roughly twice the
 Landauer minimum.
-\item \textbf{Casimir}: $\mathcal{R}_L \to 0$.  Entropy dominates.
+\item \textbf{Casimir}: $\RLs \to 0$.  Entropy dominates.
 The force is driven purely by the information cost of boundary
 conditions, with no stored energy.
 \end{itemize}
@@ -418,26 +382,26 @@ The crossover from quantum ($U$-dominated) to classical
 T_{\mathrm{cross}} = \frac{\hbar c}{2\pi a k_B}.
 \end{equation}
 For plate separation $a = 1~\mu\mathrm{m}$, $T_{\mathrm{cross}} \approx 1150$~K.
-As the system crosses from quantum to classical, $\mathcal{R}_L$
+As the system crosses from quantum to classical, $\RLs$
 decreases from above unity to zero, passing through
-$\mathcal{R}_L = 1$ at an intermediate temperature.
+$\RLs = 1$ at an intermediate temperature.
 
 
 % ============================================================
 \section{Unified classification}
 \label{sec:classification}
 
-Table~\ref{tab:classification} collects the static $\mathcal{R}_L$
+Table~\ref{tab:classification} collects the static $\RLs$
 values across all systems studied in Papers~C and~D.
 
 \begin{table}[t]
 \centering
-\caption{Static Landauer ratio $\mathcal{R}_L = U/(TS)$ across
+\caption{Static Landauer ratio $\RLs = U/(TS)$ across
 physical systems.}
 \label{tab:classification}
 \begin{tabular}{@{}llll@{}}
 \toprule
-System & $\mathcal{R}_L$ & Regime & Source \\
+System & $\RLs$ & Regime & Source \\
 \midrule
 QCD, deep confinement & 2.16 & Super & Lattice \\
 Schwarzschild BH      & 2    & Super & Smarr \\
@@ -454,21 +418,25 @@ Casimir, high-$T$      & 0    & Sub & Exact \\
 The classification has three regimes:
 
 \begin{enumerate}
-\item \textbf{Super-Landauer} ($\mathcal{R}_L > 1$): Systems that
+\item \textbf{Super-Landauer} ($\RLs > 1$): Systems that
 confine information behind a boundary.  Both the Schwarzschild black
-hole ($\mathcal{R}_L = 2$, exact) and QCD deep confinement
-($\mathcal{R}_L \approx 2.16$) fall in this regime.  The
+hole ($\RLs = 2$, exact) and QCD deep confinement
+($\RLs \approx 2.16$) fall in this regime.  The
 near-coincidence of these values, despite the vastly different
 physical scales, reflects a shared thermodynamic structure: both
 systems store roughly twice the minimum energy per bit of confined
 information.
 
-\item \textbf{Landauer-saturating} ($\mathcal{R}_L = 1$):
+\item \textbf{Landauer-saturating} ($\RLs = 1$):
 The cosmological apparent horizon, where the Misner--Sharp energy
 exactly equals the entropy-weighted temperature.
 
-\item \textbf{Sub-Landauer} ($\mathcal{R}_L < 1$): Entropy-dominated
-systems.  The high-$T$ Casimir effect reaches $\mathcal{R}_L = 0$
+\item \textbf{Sub-Landauer} ($\RLs < 1$): Systems where $U < TS$,
+i.e., the entropy contribution to the free energy exceeds the
+internal energy.  The label ``sub-Landauer'' refers to the static
+energy-to-information ratio, not to any violation of Landauer's
+erasure bound (which constrains processes, not static states).
+The high-$T$ Casimir effect reaches $\RLs = 0$
 (purely entropic free energy, no stored internal energy).
 \end{enumerate}
 
@@ -483,7 +451,7 @@ $\mathcal{R}_L^{\mathrm{diff}} = 1/2$ for the cosmological apparent
 horizon (from Trivedi's quasi-local energy
 accounting~\cite{Trivedi2024}).
 
-The static ratio defined here, $\mathcal{R}_L = U/(TS)$, measures a
+The static ratio defined here, $\RLs = U/(TS)$, measures a
 different quantity: the total energy budget relative to total
 information content, rather than the marginal cost per bit during a
 process.  The two are related by the Euler (Smarr) relation.  For
@@ -499,14 +467,14 @@ where no process is involved.
 
 
 % ============================================================
-\section{QCD string tension from the Landauer framework}
+\section{Dimensional-analysis illustration: QCD string tension}
 \label{sec:string_tension}
 
-The storage-dimension scaling argument predicts that $d=1$ storage
-(a flux tube) produces a constant force, i.e., a linear potential
-$\Phi(r) = \sigma r$ with string tension $\sigma$.  Within the
-Landauer framework, the string tension is related to the
-information density along the tube:
+A one-dimensional source (flux tube) produces a constant force,
+i.e., a linear potential $\Phi(r) = \sigma r$ with string tension
+$\sigma$.  Identifying the source strength with the Landauer
+maintenance cost per bit relates $\sigma$ to the information density
+along the tube:
 \begin{equation}
 \label{eq:sigma_landauer}
 \sigma = k_B T_c \ln 2 \;\cdot\; \rho_{1D},
@@ -544,10 +512,15 @@ flux tube being a physical one-dimensional object whose
 information content is dominated by the zeroth-order string tension.
 
 We emphasize that Eq.~\eqref{eq:sigma_landauer} is not a derivation
-of $\sigma$.  It is a consistency check: given the measured string
-tension and critical temperature, the implied information density is
-physically reasonable (a few bits per fermi, exceeding the bare color
-content).
+of $\sigma$ from the Landauer framework.  It is a dimensional-analysis
+illustration: given the measured string tension and critical
+temperature, the implied information density is a positive number of
+order unity in natural units (a few bits per fermi, exceeding the bare
+color content).  Any ratio of two positive physical quantities with
+the same dimensions yields a positive number; the value becomes
+informative only insofar as it is comparable to independently
+motivated scales (here, the color content $\log_2 3 \approx 1.58$
+bits).
 
 
 % ============================================================
@@ -556,7 +529,10 @@ content).
 
 At asymptotically high temperatures, QCD perturbation theory predicts
 the leading-order behavior of the internal energy and entropy of the
-static $q\bar{q}$ system~\cite{KZ2005a,Kaczmarek2007}:
+static $q\bar{q}$ system.  The $g^3$ contribution to the free energy
+arises from Debye screening~\cite{Kaczmarek2007,Linde1980}, and the
+$g^5$ correction from non-perturbative magnetic
+effects~\cite{KZ2005a}.  The resulting scalings are:
 \begin{align}
 U_{\infty}(T) &\sim \mathcal{O}(g^5 T), \\
 T\,S_{\infty}(T) &\sim \mathcal{O}(g^3 T),
@@ -572,10 +548,10 @@ therefore scales as
 \end{equation}
 by asymptotic freedom ($g \to 0$ as $T \to \infty$).
 
-This means the QCD $\mathcal{R}_L$ must cross through unity at some
+This means the QCD $\RLs$ must cross through unity at some
 temperature above $T_c$.  The lattice data show
-$\mathcal{R}_L = 1.04$ at $T/T_c = 2.99$, so the crossing
-$\mathcal{R}_L = 1$ occurs at $T/T_c \gtrsim 3$.
+$\RLs = 1.04$ at $T/T_c = 2.99$, so the crossing
+$\RLs = 1$ occurs at $T/T_c \gtrsim 3$.
 
 The physical picture is clear: at very high temperatures, the QCD
 system transitions from a super-Landauer confined regime (flux tube
@@ -583,7 +559,7 @@ storing excess energy) to a sub-Landauer screened regime
 (color-screened charges with entropy-dominated free energy), passing
 through Landauer saturation at an intermediate temperature.  This
 mirrors the Casimir quantum-to-classical crossover, where
-$\mathcal{R}_L$ also decreases from above to below unity as
+$\RLs$ also decreases from above to below unity as
 thermal effects dominate.
 
 
@@ -596,26 +572,25 @@ The results of this paper are consistent with the trilogy framework:
 \begin{enumerate}
 \item \textbf{Paper~A}~\cite{Rahnama2026A}: The Landauer bound
 $Q \geq k_B T \ln 2$ per bit, which appears in the denominator of
-$\mathcal{R}_L$, is derived operationally in Paper~A as the minimum
+$\RLs$, is derived operationally in Paper~A as the minimum
 heat generated by quantum measurement.
 
 \item \textbf{Paper~B}~\cite{Rahnama2026BornRule}: The Born rule
 emerges from maximizing information yield per Landauer cost.
-$\mathcal{R}_L$ measures whether a physical system achieves this
+$\RLs$ measures whether a physical system achieves this
 optimal cost in its thermodynamic bookkeeping.
 
 \item \textbf{Paper~C}~\cite{Rahnama2026BlackHole}: The differential
-$\mathcal{R}_L$ diagnostic is defined for gravitational horizons.
+$\RLd$ diagnostic is defined for gravitational horizons.
 The present paper extends the analysis to non-gravitational
 systems using the static ratio, and relates the two definitions
 through the Smarr homogeneity factor
 (Section~\ref{sec:classification}).
 
-\item \textbf{Storage dimension and holography}: The $d=0$ case of
-the storage-dimension scaling argument reproduces the holographic
-scaling $S \propto A$ that underlies the Bekenstein--Hawking entropy.
-The static $\mathcal{R}_L = 2$ for black holes follows from combining
-this holographic storage with the Smarr relation.
+\item \textbf{Smarr relation}: The static $\RLs = 2$ for black
+holes follows from the Smarr relation ($Mc^2 = 2T_H S_{BH}$),
+connecting the differential ratio of Paper~C to the static ratio
+used here via the Euler homogeneity factor.
 \end{enumerate}
 
 
@@ -625,17 +600,18 @@ this holographic storage with the Smarr relation.
 
 \textbf{What we claim:}
 \begin{enumerate}
-\item The static Landauer ratio $\mathcal{R}_L = U/(TS)$ is a useful
+\item The static Landauer ratio $\RLs = U/(TS)$ is a useful
 diagnostic for comparing the energy budgets of thermodynamic systems.
-\item QCD flux tubes are super-Landauer ($\mathcal{R}_L > 1$), with
+\item QCD flux tubes are super-Landauer ($\RLs > 1$), with
 a minimum at $T_c$ and a deep-confinement value
-$\mathcal{R}_L \approx 2.16$ close to the Schwarzschild value of 2.
+$\RLs \approx 2.16$ close to the Schwarzschild value of 2.
 \item The high-$T$ Casimir effect is sub-Landauer
-($\mathcal{R}_L \to 0$), computed from exact analytical results.
-\item The storage-dimension scaling argument provides a geometric
-classification of force laws by information-storage dimensionality.
+($\RLs \to 0$), computed from exact analytical results.
+\item The standard potential-theory correspondence between source
+dimension and force law ($F \sim r^{d-2}$) admits a Landauer
+interpretation but is not derived from information theory.
 \item The implied flux-tube information density ($6$--$8$~bits/fm) is
-consistent with QCD phenomenology.
+a dimensional-analysis illustration consistent with QCD phenomenology.
 \end{enumerate}
 
 \textbf{What we do not claim:}
@@ -644,8 +620,9 @@ consistent with QCD phenomenology.
 or the fine structure constant from the Landauer framework.
 \item We do not modify QCD, QED, or general relativity.
 \item We do not claim that information storage ``causes'' forces.
-The storage-dimension scaling argument classifies force-law forms by
-geometry; it does not provide a dynamical mechanism.
+The source-dimension correspondence (Section~\ref{sec:storage_dim})
+is standard potential theory; the Landauer framing provides a
+thermodynamic interpretation but no dynamical mechanism.
 \item We do not claim that the near-coincidence
 $\mathcal{R}_L^{\mathrm{QCD}} \approx \mathcal{R}_L^{\mathrm{BH}}
 \approx 2$ implies a dynamical connection between QCD confinement
@@ -653,7 +630,7 @@ and gravity.  It is a thermodynamic observation that may or may not
 have deeper significance.
 \item The Kaczmarek--Zantow data use $N_f = 2$ with heavier-than-physical
 quark masses.  The qualitative features (minimum at $T_c$,
-$\mathcal{R}_L > 1$) are expected to persist for physical quark
+$\RLs > 1$) are expected to persist for physical quark
 masses, but the precise values will shift.
 \end{enumerate}
 
@@ -662,36 +639,30 @@ masses, but the precise values will shift.
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have defined the static Landauer ratio $\mathcal{R}_L = U/(TS)$
+We have defined the static Landauer ratio $\RLs = U/(TS)$
 and computed it for QCD flux tubes and the thermal Casimir effect.
 Combined with gravitational systems, the results define a
 three-regime classification:
 
 \begin{enumerate}
-\item \textbf{Super-Landauer} ($\mathcal{R}_L \geq 2$):
-Schwarzschild black holes ($\mathcal{R}_L = 2$, exact via Smarr) and
-QCD deep confinement ($\mathcal{R}_L \approx 2.16$).  Both systems
+\item \textbf{Super-Landauer} ($\RLs \geq 2$):
+Schwarzschild black holes ($\RLs = 2$, exact via Smarr) and
+QCD deep confinement ($\RLs \approx 2.16$).  Both systems
 confine information behind a boundary and store roughly twice the
 Landauer minimum energy per bit.
 
-\item \textbf{Landauer-saturating} ($\mathcal{R}_L = 1$):
+\item \textbf{Landauer-saturating} ($\RLs = 1$):
 The cosmological apparent horizon, where the Misner--Sharp energy
 exactly equals the entropy-weighted temperature.
 
-\item \textbf{Sub-Landauer} ($\mathcal{R}_L < 1$):
-High-temperature Casimir ($\mathcal{R}_L \to 0$) and, at
+\item \textbf{Sub-Landauer} ($\RLs < 1$):
+High-temperature Casimir ($\RLs \to 0$) and, at
 asymptotically high temperatures, the screened QCD regime
-($\mathcal{R}_L \sim g^2 \to 0$).
+($\RLs \sim g^2 \to 0$).
 \end{enumerate}
 
-The storage-dimension scaling argument provides a geometric
-organizing principle: $d$-dimensional information storage produces a
-force law $F \sim r^{d-2}$, connecting the inverse-square law
-($d=0$), confinement ($d=1$), and linear restoring forces ($d=2$) to
-the dimensionality of the information-carrying manifold.
-
 The headline result is that black holes and QCD confinement share the
-same static Landauer ratio ($\mathcal{R}_L \approx 2$), despite
+same static Landauer ratio ($\RLs \approx 2$), despite
 operating at vastly different scales.  Both systems confine
 information and both pay roughly twice the thermodynamic minimum to
 do so.
@@ -715,7 +686,7 @@ IBM J.\ Res.\ Dev.\ \textbf{5}, 183 (1961).
 \bibitem{Cortes2024}
 M.~Cort\^es and A.~R.~Liddle, ``Hawking evaporation and the
 Landauer Principle,''
-Phys.\ Rev.\ Lett.\ \textbf{132}, 141501 (2024).
+arXiv:2407.08777 [gr-qc] (2024).
 
 \bibitem{Rahnama2026BlackHole}
 M.~Rahnama, ``Black Holes as Landauer-Saturating Erasure Channels:
@@ -766,6 +737,11 @@ string,''
 JHEP \textbf{07}, 049 (2002),
 arXiv:hep-lat/0207003.
 
+\bibitem{Linde1980}
+A.~D.~Linde, ``Infrared problem in the thermodynamics of the
+Yang--Mills gas,''
+Phys.\ Lett.\ B \textbf{96}, 289 (1980).
+
 \bibitem{Bekenstein1973}
 J.~D.~Bekenstein, ``Black holes and entropy,''
 Phys.\ Rev.\ D \textbf{7}, 2333 (1973).
@@ -785,6 +761,17 @@ M.~Rahnama, ``Born's Rule from Record-Formation Constraints: A
 Thermodynamic-Information Axiomatics,''
 Preprints \textbf{2026}, 202603.0473 (2026).
 \url{https://doi.org/10.20944/preprints202603.0473.v1}.
+
+\bibitem{Callen1985}
+H.~B.~Callen, \emph{Thermodynamics and an Introduction to
+Thermostatistics}, 2nd ed.\ (Wiley, New York, 1985),
+Ch.~3 (Euler relation and homogeneous functions).
+
+\bibitem{KastorRayTraschen2009}
+D.~Kastor, S.~Ray, and J.~Traschen, ``Enthalpy and the mechanics
+of AdS black holes,''
+Class.\ Quantum Grav.\ \textbf{26}, 195011 (2009),
+arXiv:0904.2765.
 
 \bibitem{Jacobson1995}
 T.~Jacobson, ``Thermodynamics of spacetime: The Einstein equation
