@@ -489,12 +489,14 @@ def group5_classification():
     # System data: static R_L = U/(TS) values
     # BH: Smarr relation Mc^2 = 2 T_H S_BH => R_L = 2
     # Cosmo: Misner-Sharp E_MS = T S => R_L = 1
+    # Photon gas: U = aVT^4, S = (4/3)aVT^3, TS = (4/3)U => R_L = 3/4
     systems = {
         'Schwarzschild BH': (2.0, 'super-Landauer'),
         'Kerr BH': (2.0, 'super-Landauer'),
         'Reissner-Nordstrom BH': (2.0, 'super-Landauer'),
         'Rindler horizon': (2.0, 'super-Landauer'),
         'Cosmological apparent': (1.0, 'saturating'),
+        'Photon gas': (0.75, 'sub-Landauer'),
         'QCD at T_c (lattice)': (1.17, 'super-Landauer'),
         'QCD deep confinement': (2.16, 'super-Landauer'),
         'Casimir high-T': (0.0, 'sub-Landauer'),
@@ -520,10 +522,27 @@ def group5_classification():
           1.0 if systems['Casimir high-T'][0] < 1.0 else 0.0,
           1.0, abs_tol=0.0)
 
-    # Check 8: Ordering: QCD_deep ~ BH > cosmo > Casimir
-    check("Ordering: R_L(QCD_deep) > R_L(cosmo) > R_L(Casimir)",
+    # Check 8: Photon gas is sub-Landauer (R_L < 1)
+    check("Photon gas: R_L < 1 (sub-Landauer)",
+          1.0 if systems['Photon gas'][0] < 1.0 else 0.0,
+          1.0, abs_tol=0.0)
+
+    # Check 9: Photon gas R_L = 3/4 (exact, Stefan-Boltzmann)
+    # U = aVT^4, S = (4/3)aVT^3 => TS = (4/3)U => R_L = 3/4
+    a_SB = np.pi**2 * k_B**4 / (15 * hbar**3 * c_light**3)
+    T_test = 5000.0  # K
+    V_test = 1.0     # m^3
+    U_photon = a_SB * V_test * T_test**4
+    S_photon = (4.0/3.0) * a_SB * V_test * T_test**3
+    R_L_photon = U_photon / (T_test * S_photon)
+    check("Photon gas: R_L = 3/4 (Stefan-Boltzmann)",
+          R_L_photon, 0.75, tol=1e-10)
+
+    # Check 9: Ordering: QCD_deep > cosmo > photon > Casimir
+    check("Ordering: R_L(QCD_deep) > R_L(cosmo) > R_L(photon) > R_L(Casimir)",
           1.0 if (systems['QCD deep confinement'][0] >
                   systems['Cosmological apparent'][0] >
+                  systems['Photon gas'][0] >
                   systems['Casimir high-T'][0]) else 0.0,
           1.0, abs_tol=0.0)
 

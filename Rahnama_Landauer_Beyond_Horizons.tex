@@ -63,17 +63,18 @@ Schwarzschild black hole gives $\RLs = 2$ exactly
 (via the Smarr relation $Mc^2 = 2\,T_H S_{BH}$), while the
 cosmological apparent horizon gives $\RLs = 1$ (via the
 Misner--Sharp energy $E_{MS} = T S$).
-These results define a three-regime classification:
-super-Landauer ($\RLs > 1$, black holes and QCD
-confinement), Landauer-saturating ($\RLs = 1$,
+Together with the photon gas ($\RLs = 3/4$, exact from
+Stefan--Boltzmann), these results define a three-regime
+classification: super-Landauer ($\RLs > 1$, black holes and
+QCD confinement), Landauer-saturating ($\RLs = 1$,
 cosmological expansion), and sub-Landauer ($\RLs < 1$,
-high-temperature Casimir).
+photon gas, high-temperature Casimir).
 We note the standard potential-theory result that a
 $d$-dimensional source distribution produces a force $F \sim r^{d-2}$,
 which the Landauer framing interprets thermodynamically but does not
 derive.
 All numerical claims are verified by a companion simulation with
-70 falsifiable checks across 8 groups.
+72 falsifiable checks across 8 groups.
 \end{abstract}
 
 \maketitle
@@ -283,6 +284,12 @@ masses, so the numerical proximity should be treated with caution:
 it could shift with physical quark masses or improved lattice data.
 Nonetheless, both systems share the structural feature of confining
 information behind a boundary.
+Modern (2+1)-flavor lattice calculations with physical quark
+masses~\cite{Bazavov2016} confirm that the static-quark entropy peaks
+sharply near the chiral crossover temperature
+$T_c \approx 155$~MeV, consistent with the pattern seen here.
+Extending the $\RLs$ analysis to these data is a natural
+next step.
 \end{enumerate}
 
 The free energy $F_{\infty}$ is positive below $T_c$ and decreasing
@@ -392,12 +399,16 @@ $\RLs = 1$ at an intermediate temperature.
 \label{sec:classification}
 
 Table~\ref{tab:classification} collects the static $\RLs$
-values across all systems studied in Papers~C and~D.
+values across all systems studied in Papers~C and~D, together with
+two benchmark systems (photon gas, cosmological horizon) that
+anchor the classification.
 
 \begin{table}[t]
 \centering
 \caption{Static Landauer ratio $\RLs = U/(TS)$ across
-physical systems.}
+physical systems.  Photon gas: $U = aVT^4$,
+$S = \tfrac{4}{3}aVT^3$, so $TS = \tfrac{4}{3}U$ and
+$\RLs = 3/4$.}
 \label{tab:classification}
 \begin{tabular}{@{}llll@{}}
 \toprule
@@ -410,6 +421,7 @@ QCD, $T/T_c = 2.99$   & 1.04 & Super & Lattice \\
 \midrule
 Cosmological apparent  & 1    & Saturating & Misner--Sharp \\
 \midrule
+Photon gas (blackbody) & 3/4  & Sub & Stefan--Boltzmann \\
 Casimir, high-$T$      & 0    & Sub & Exact \\
 \bottomrule
 \end{tabular}
@@ -436,7 +448,9 @@ i.e., the entropy contribution to the free energy exceeds the
 internal energy.  The label ``sub-Landauer'' refers to the static
 energy-to-information ratio, not to any violation of Landauer's
 erasure bound (which constrains processes, not static states).
-The high-$T$ Casimir effect reaches $\RLs = 0$
+The photon gas provides a clean benchmark: $U \propto T^4$ and
+$S \propto T^3$ give $TS = (4/3)U$, hence $\RLs = 3/4$ exactly.
+The high-$T$ Casimir effect reaches the extreme $\RLs = 0$
 (purely entropic free energy, no stored internal energy).
 \end{enumerate}
 
@@ -530,9 +544,9 @@ bits).
 At asymptotically high temperatures, QCD perturbation theory predicts
 the leading-order behavior of the internal energy and entropy of the
 static $q\bar{q}$ system.  The $g^3$ contribution to the free energy
-arises from Debye screening~\cite{Kaczmarek2007,Linde1980}, and the
+arises from Debye screening~\cite{Linde1980,BraatenNieto1996}, and the
 $g^5$ correction from non-perturbative magnetic
-effects~\cite{KZ2005a}.  The resulting scalings are:
+effects~\cite{BraatenNieto1996,KZ2005a}.  The resulting scalings are:
 \begin{align}
 U_{\infty}(T) &\sim \mathcal{O}(g^5 T), \\
 T\,S_{\infty}(T) &\sim \mathcal{O}(g^3 T),
@@ -656,8 +670,9 @@ The cosmological apparent horizon, where the Misner--Sharp energy
 exactly equals the entropy-weighted temperature.
 
 \item \textbf{Sub-Landauer} ($\RLs < 1$):
-High-temperature Casimir ($\RLs \to 0$) and, at
-asymptotically high temperatures, the screened QCD regime
+The photon gas ($\RLs = 3/4$, exact), high-temperature
+Casimir ($\RLs \to 0$), and at asymptotically high
+temperatures, the screened QCD regime
 ($\RLs \sim g^2 \to 0$).
 \end{enumerate}
 
@@ -668,7 +683,7 @@ information and both pay roughly twice the thermodynamic minimum to
 do so.
 
 The companion simulation verifies all numerical claims through
-70 falsifiable checks across 8 groups, including negative tests that
+72 falsifiable checks across 8 groups, including negative tests that
 confirm wrong inputs produce wrong outputs.
 
 \section*{Code Availability}
@@ -736,6 +751,18 @@ M.~L\"uscher and P.~Weisz, ``Quark confinement and the bosonic
 string,''
 JHEP \textbf{07}, 049 (2002),
 arXiv:hep-lat/0207003.
+
+\bibitem{BraatenNieto1996}
+E.~Braaten and A.~Nieto, ``Free energy of QCD at high temperature,''
+Phys.\ Rev.\ D \textbf{53}, 3421 (1996),
+arXiv:hep-ph/9510408.
+
+\bibitem{Bazavov2016}
+A.~Bazavov, N.~Brambilla, H.-T.~Ding, P.~Petreczky,
+H.-P.~Schadler, A.~Vairo, and J.~H.~Weber,
+``Polyakov loop in 2+1 flavor QCD from low to high temperatures,''
+Phys.\ Rev.\ D \textbf{93}, 114502 (2016),
+arXiv:1603.06637.
 
 \bibitem{Linde1980}
 A.~D.~Linde, ``Infrared problem in the thermodynamics of the
