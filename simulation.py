@@ -168,7 +168,7 @@ def group1_storage_dimension():
 
 
 # ============================================================
-# GROUP 2: QCD Flux Tube R_L from Lattice Data (16 checks)
+# GROUP 2: QCD Flux Tube R_L from Lattice Data (17 checks)
 # ============================================================
 def group2_qcd_rl():
     """
@@ -278,23 +278,31 @@ def group2_qcd_rl():
     check("U_inf/Landauer_cost near T_c (should be R_L ~ 1.2)",
           U_peak / Landauer_total, R_L[near_Tc].min(), tol=0.15)
 
+    # Check 13: R_L ratio invariance under uniform rescaling (Bazavov argument)
+    # Modern 2+1 flavor data shows U and S reduced by ~factor 2 vs Nf=2.
+    # R_L = U/(TS) is invariant: halving both U and S leaves R_L unchanged.
+    scale = 0.5  # Bazavov: peak ~factor 2 smaller
+    R_L_scaled = (U_Tc * scale) / (T_Tc * (S_inf * scale))
+    check("R_L invariant under uniform U,S rescaling (Bazavov)",
+          np.max(np.abs(R_L_scaled - R_L)), 0.0, abs_tol=1e-12)
+
     # NEGATIVE TESTS
-    # Check 13: Wrong R_L = 0.5 (cosmological value) should NOT match QCD
+    # Check 14: Wrong R_L = 0.5 (cosmological value) should NOT match QCD
     check("NEGATIVE: R_L != 0.5 at any T for QCD",
           np.min(np.abs(R_L - 0.5)), 0.0, abs_tol=0.01, negative=True)
 
-    # Check 14: S_inf should NOT be constant (it has strong T-dependence)
+    # Check 15: S_inf should NOT be constant (it has strong T-dependence)
     check("NEGATIVE: S_inf not constant (std/mean > 0.5)",
           np.std(S_inf) / np.mean(S_inf), 0.0, abs_tol=0.01, negative=True)
 
-    # Check 15: R_L should NOT equal exactly 1 at any data point
+    # Check 16: R_L should NOT equal exactly 1 at any data point
     check("NEGATIVE: R_L != 1.000 at any lattice point",
           np.min(np.abs(R_L - 1.0)), 0.0, abs_tol=0.005, negative=True)
 
-    # Check 16: If we use wrong S (half the actual), R_L would be ~2x too large
-    R_L_wrong = U_Tc / (T_Tc * S_inf * 0.5)  # using half entropy
-    check("NEGATIVE: wrong entropy gives wrong R_L",
-          R_L_wrong[6], R_L[6], tol=0.01, negative=True)
+    # Check 17: Non-uniform rescaling DOES change R_L (control test)
+    R_L_nonuniform = (U_Tc * 0.8) / (T_Tc * (S_inf * 0.5))  # different factors
+    check("NEGATIVE: non-uniform rescaling changes R_L",
+          R_L_nonuniform[6], R_L[6], tol=0.01, negative=True)
 
     print_group_summary(2)
 

@@ -6,7 +6,7 @@ Moses Rahnama (2026)
 
 ## Overview
 
-This repository contains the companion simulation for Paper D of the Landauer saturation trilogy. The simulation performs 72 independent falsifiable checks across 8 groups, verifying every quantitative claim in the manuscript.
+This repository contains the companion simulation for Paper D of the Landauer saturation trilogy. The simulation performs 73 independent falsifiable checks across 8 groups, verifying every quantitative claim in the manuscript.
 
 The static Landauer ratio is defined as
 
@@ -29,7 +29,7 @@ where $U$ is the total internal energy, $T$ the temperature, and $S$ the entropy
 ## Check groups
 
 1. **Source-dimension observation** (8 checks): $d$-dimensional source yields $F \sim r^{d-2}$ force law
-2. **QCD flux tube $\mathcal{R}_L^{\mathrm{stat}}$ from lattice data** (16 checks): Kaczmarek-Zantow free energy, internal energy, entropy
+2. **QCD flux tube $\mathcal{R}_L^{\mathrm{stat}}$ from lattice data** (17 checks): Kaczmarek-Zantow free energy, internal energy, entropy; ratio invariance under rescaling (Bazavov)
 3. **Casimir $\mathcal{R}_L^{\mathrm{stat}}$** (12 checks): Analytical high-$T$ and low-$T$ limits
 4. **Black hole static $\mathcal{R}_L^{\mathrm{stat}}$** (8 checks): Smarr relation gives $\mathcal{R}_L^{\mathrm{stat}} = 2$
 5. **Classification table** (10 checks): Full ordering, category assignments, photon gas benchmark
@@ -43,7 +43,7 @@ where $U$ is the total internal energy, $T$ the temperature, and $S$ the entropy
 python simulation.py
 ```
 
-All 72 checks should report `[OK]`. No external dependencies beyond NumPy.
+All 73 checks should report `[OK]`. No external dependencies beyond NumPy.
 
 ## Relation to the trilogy
 

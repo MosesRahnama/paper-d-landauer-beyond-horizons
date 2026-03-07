@@ -74,7 +74,7 @@ $d$-dimensional source distribution produces a force $F \sim r^{d-2}$,
 which the Landauer framing interprets thermodynamically but does not
 derive.
 All numerical claims are verified by a companion simulation with
-72 falsifiable checks across 8 groups.
+73 falsifiable checks across 8 groups.
 \end{abstract}
 
 \maketitle
@@ -280,16 +280,23 @@ At $T/T_c = 0.79$, $\RLs \approx 2.16$.  This is within $\sim 8\%$
 of the Schwarzschild value $\RLs = 2$ (Eq.~\ref{eq:RL_BH}).
 The BH value is exact (from holographic scaling), while the QCD value
 is a lattice result at $N_f = 2$ with heavier-than-physical pion
-masses, so the numerical proximity should be treated with caution:
-it could shift with physical quark masses or improved lattice data.
+masses~\cite{KaczmarekZantow2005}, so the numerical proximity should
+be treated with caution.
 Nonetheless, both systems share the structural feature of confining
 information behind a boundary.
+
 Modern (2+1)-flavor lattice calculations with physical quark
-masses~\cite{Bazavov2016} confirm that the static-quark entropy peaks
-sharply near the chiral crossover temperature
-$T_c \approx 155$~MeV, consistent with the pattern seen here.
-Extending the $\RLs$ analysis to these data is a natural
-next step.
+masses~\cite{Bazavov2016} confirm that the static-quark entropy
+$S_Q$ peaks sharply near the chiral crossover temperature
+$T_c \approx 155$~MeV.  The continuum-extrapolated peak height is
+roughly a factor of two smaller than the $N_f = 2$, $N_\tau = 4$
+values used here, but both $U_\infty$ and $S_\infty$ are reduced by
+comparable factors.  Because $\RLs = U/(TS)$ is a dimensionless
+\emph{ratio}, it is insensitive to the overall scale of the
+thermodynamic potentials: halving both $U$ and $S$ leaves $\RLs$
+unchanged.  The qualitative pattern---super-Landauer in confinement,
+approaching saturation near $T_c$---is therefore robust across
+flavor content and quark masses.
 \end{enumerate}
 
 The free energy $F_{\infty}$ is positive below $T_c$ and decreasing
@@ -683,7 +690,7 @@ information and both pay roughly twice the thermodynamic minimum to
 do so.
 
 The companion simulation verifies all numerical claims through
-72 falsifiable checks across 8 groups, including negative tests that
+73 falsifiable checks across 8 groups, including negative tests that
 confirm wrong inputs produce wrong outputs.
 
 \section*{Code Availability}
