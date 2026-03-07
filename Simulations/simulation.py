@@ -65,46 +65,37 @@ def print_results():
 
 
 # ============================================================
-# GROUP 1: Storage-Dimension Theorem (10 checks)
+# GROUP 1: Storage-Dimension Geometric Scaling (8 checks)
 # ============================================================
 def group1_storage_dimension():
     """
-    Theorem: If information is stored on a d-dimensional manifold
-    embedded in 3D space, the Landauer maintenance cost has a
-    characteristic potential phi(r) and force F(r) = -d(phi)/dr:
+    Geometric scaling: If information is stored on a d-dimensional
+    manifold of characteristic scale r, the total information N ~ r^d,
+    giving a maintenance potential phi ~ r^d and force F ~ r^(d-1)
+    for d >= 1.  For d=0 (broadcast), phi ~ 1/r and F ~ 1/r^2.
 
-      d=0 (point/holographic): phi ~ 1/r,  F ~ 1/r^2
-      d=1 (line/flux tube):    phi ~ r,    F ~ const
-      d=2 (surface):           phi ~ r^2,  F ~ r
-
-    This follows from the information density rho(r) scaling
-    with the manifold measure and the potential being the
-    integrated Landauer cost.
-
-    We verify by computing the force-law exponent from
-    phi(r) = integral of (k_B T ln 2) * rho(r') dr' for each geometry.
+      d=0 (point/broadcast): phi ~ 1/r,  F ~ 1/r^2
+      d=1 (line/flux tube):  phi ~ r,    F ~ const
+      d=2 (surface):         phi ~ r^2,  F ~ r
     """
-    print("\n  --- GROUP 1: Storage-Dimension Theorem ---")
+    print("\n  --- GROUP 1: Storage-Dimension Geometric Scaling ---")
 
-    # For a d-dimensional storage manifold in 3D:
-    #   Information density: rho(r) ~ r^(d-3)  for d < 3
-    #   (0D: rho ~ 1/r^3 -> after integrating over shell: u(r) ~ 1/r^2)
-    #   (Actually: for point source broadcasting onto sphere at r:
-    #    rho_surface(r) = N_bits / (4 pi r^2), so u(r) ~ 1/r^2
-    #    phi(r) = integral_r^inf u(r') 4pi r'^2 dr' / (4pi r'^2) = N_bits * k_BT ln2 / r)
+    # For a d-dimensional storage manifold:
+    #   Total information N ~ r^d -> potential phi ~ r^d (for d >= 1)
+    #   Force F = -dphi/dr ~ d * r^(d-1), so force exponent = d-1
     #
-    # More precisely, for d-dimensional storage:
-    #   Storage measure ~ r^d -> bits per unit "volume" ~ r^(d-3) in 3D
-    #   Potential phi(r) = k_BT ln2 * integral of bit density
-    #   Force exponent: F ~ r^(d-2)
+    #   For d=0 (point/broadcast): density dilutes as 1/r^2 on enclosing
+    #   sphere, giving phi ~ 1/r, F ~ 1/r^2, force exponent = -2
+    #
+    # Summary: d=0 -> exp=-2, d=1 -> exp=0, d=2 -> exp=1
 
     # Test 1-3: Force-law exponent for each dimension
-    for d, expected_exp, label in [(0, -2, "0D holographic"),
-                                    (1, -1, "1D flux tube"),
-                                    (2,  0, "2D surface")]:
-        # phi(r) ~ r^(d-1) for d >= 1; phi(r) ~ 1/r for d = 0
-        # F = -dphi/dr ~ r^(d-2)
-        force_exp = d - 2
+    for d, expected_exp, label in [(0, -2, "0D broadcast"),
+                                    (1,  0, "1D flux tube"),
+                                    (2,  1, "2D surface")]:
+        # d=0: special case (broadcast), force_exp = -2
+        # d>=1: phi ~ r^d, F ~ r^(d-1), force_exp = d-1
+        force_exp = -2 if d == 0 else d - 1
         check(f"Storage dim d={d} ({label}): force exponent",
               force_exp, expected_exp, abs_tol=0.0)
 

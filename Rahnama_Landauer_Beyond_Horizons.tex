@@ -47,8 +47,9 @@ QCD Confinement and the Casimir Effect}
 
 \begin{abstract}
 We define the static Landauer ratio
-$\RLs \equiv U/(T S)$, the Euler homogeneity factor of the
-equation of state, and compute it for two non-gravitational systems
+$\RLs \equiv U/(T S)$, which equals the Euler homogeneity
+degree of the entropy with respect to energy, and compute it for
+two non-gravitational systems
 with complete thermodynamic decompositions.
 For QCD flux tubes, using lattice data from Kaczmarek and Zantow
 ($N_f = 2$, $T_c = 200$~MeV), we find $\RLs > 1$ at all
@@ -69,8 +70,9 @@ classification: super-Landauer ($\RLs > 1$, black holes and
 QCD confinement), Landauer-saturating ($\RLs = 1$,
 cosmological expansion), and sub-Landauer ($\RLs < 1$,
 photon gas, high-temperature Casimir).
-We note the standard potential-theory result that a
-$d$-dimensional source distribution produces a force $F \sim r^{d-2}$,
+We note that geometric scaling of information stored on a
+$d$-dimensional manifold yields a force $F \sim r^{d-1}$ for
+$d \geq 1$ (or $F \sim 1/r^2$ for point sources, $d = 0$),
 which the Landauer framing interprets thermodynamically but does not
 derive.
 All numerical claims are verified by a companion simulation with
@@ -110,12 +112,14 @@ system.  A more useful diagnostic for static systems is the
 \RLs \;\equiv\; \frac{U}{T\,S},
 \end{equation}
 which compares the total internal energy to the total
-entropy-weighted temperature.  For any system whose internal energy
-is a homogeneous function of entropy of degree~$n$ (at fixed
-extensive variables), Euler's theorem gives $U = n\,T\,S$, so
+entropy-weighted temperature.  For any system obeying
+$\partial S/\partial U = 1/T$, if the entropy is a homogeneous
+function of internal energy of degree~$n$ (at fixed extensive
+variables), Euler's theorem gives $U\,\partial S/\partial U = n\,S$,
+i.e.\ $U/T = n\,S$, so $U = n\,T\,S$ and
 $\mathcal{R}_L^{\mathrm{stat}} = n$.  The static ratio is therefore
-the Euler homogeneity degree of the equation of
-state~\cite{Callen1985,KastorRayTraschen2009}.  We adopt the name
+the Euler homogeneity degree of the entropy with respect to
+energy~\cite{Callen1985,KastorRayTraschen2009}.  We adopt the name
 ``Landauer ratio''
 because $T\,S = N_{\mathrm{bits}}\,k_B T \ln 2$ equals the total
 Landauer maintenance cost of the system's information content, but
@@ -149,8 +153,8 @@ temperature~\cite{Casimir1948,Lifshitz1956}.
 \end{enumerate}
 
 The paper is organized as follows.
-Section~\ref{sec:storage_dim} recalls the standard
-potential-theory correspondence between source dimension and force law.
+Section~\ref{sec:storage_dim} recalls the geometric-scaling
+correspondence between storage dimension and force law.
 Section~\ref{sec:qcd} applies $\mathcal{R}_L^{\mathrm{stat}}$ to
 QCD flux tubes.
 Section~\ref{sec:casimir} treats the thermal Casimir effect.
@@ -165,31 +169,41 @@ Section~\ref{sec:conclusion} concludes.
 \section{Storage-dimension observation}
 \label{sec:storage_dim}
 
-It is a standard result of potential theory that a source distributed
-on a $d$-dimensional manifold in three-dimensional space produces a
-potential $\Phi \sim r^{d-1}$ (for $d \geq 1$) or $\Phi \sim 1/r$
-(for a point source, $d = 0$), giving a radial force
-$F \sim r^{d-2}$ in all cases.  This is Gauss's law applied to
-different source geometries; the word ``information'' adds no
-dynamical content.  In the Landauer framing, the maintenance cost
-$k_B T \ln 2$ per bit replaces the generic source strength, but the
-force-law exponent is fixed entirely by the geometry.
-Table~\ref{tab:storage_dim} collects the correspondence:
+The relationship between the dimensionality of information storage
+and the resulting force law follows from geometric scaling.
+If information is stored uniformly on a $d$-dimensional structure
+of characteristic scale~$r$, the total information content scales
+as $N \sim r^d$.  Because the thermodynamic maintenance potential
+$\Phi$ is proportional to $N$, we have $\Phi \sim r^d$ for
+$d \geq 1$, yielding a radial force
+$F = -d\Phi/dr \sim r^{d-1}$.
+
+For unconfined, localized information ($d = 0$), the bits are
+broadcast outward.  The information density on an enclosing sphere
+of radius~$r$ dilutes as $\rho \sim 1/r^2$; integrating this
+density gives a cumulative maintenance potential $\Phi \sim 1/r$
+and an inverse-square force $F \sim 1/r^2$.
+
+Table~\ref{tab:storage_dim} collects the correspondence.
+The Landauer framing provides a thermodynamic interpretation for
+these potentials (the maintenance cost per bit is $k_B T \ln 2$),
+but the force-law exponents are fixed entirely by the geometry of
+the storage manifold:
 $d = 0$ gives the inverse-square law (gravity, electrostatics),
 $d = 1$ gives a constant force (QCD confinement), and $d = 2$ gives
 a linear restoring force.
 
 \begin{table}[b]
 \centering
-\caption{Source dimension and force law (standard potential theory).}
+\caption{Storage dimension and force law from geometric scaling.}
 \label{tab:storage_dim}
 \begin{tabular}{@{}clll@{}}
 \toprule
-$d$ & Source geometry & $\Phi(r)$ & Force law \\
+$d$ & Storage geometry & $\Phi(r)$ & Force law \\
 \midrule
-0 & Point / holographic & $\sim 1/r$ & $\sim 1/r^2$ \\
-1 & Line (flux tube)    & $\sim r$   & $\sim$ const \\
-2 & Surface             & $\sim r^2$ & $\sim r$ \\
+0 & Point (broadcast) & $\sim 1/r$ & $\sim 1/r^2$ \\
+1 & Line (flux tube)  & $\sim r$   & $\sim$ const \\
+2 & Surface           & $\sim r^2$ & $\sim r$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -342,9 +356,10 @@ to the Schwarzschild black hole ($\RLs = 2$) is striking.
 Both systems confine information behind a boundary (the horizon for
 gravity, the flux tube for color) and both store roughly twice the
 Landauer minimum energy per bit of confined information.  The Smarr
-factor of 2 for black holes arises from the homogeneity of the mass
-as a function of area ($M \propto A^{1/2}$, giving
-$M = 2\,\partial M/\partial S \cdot S = 2TS$); the QCD factor
+factor of 2 for black holes arises because the Bekenstein--Hawking
+entropy scales as $S_{BH} \propto M^2$ (degree~2 in energy), so
+Euler's theorem gives $M/T_H = 2\,S_{BH}$, i.e.\ $M = 2\,T_H S_{BH}$;
+the QCD factor
 $\approx 2$ in deep confinement reflects the analogous energetic
 overhead of maintaining the chromoelectric string.
 However, convergence near $\RLs = 2$ need not imply a dynamical
@@ -602,8 +617,9 @@ a minimum at $T_c$ and a deep-confinement value
 $\RLs \approx 2.16$ close to the Schwarzschild value of 2.
 \item The high-$T$ Casimir effect is sub-Landauer
 ($\RLs \to 0$), computed from exact analytical results.
-\item The standard potential-theory correspondence between source
-dimension and force law ($F \sim r^{d-2}$) admits a Landauer
+\item The geometric-scaling correspondence between storage
+dimension and force law ($F \sim r^{d-1}$ for $d \geq 1$;
+$F \sim 1/r^2$ for $d = 0$) admits a Landauer
 interpretation but is not derived from information theory.
 \item The implied flux-tube information density ($6$--$8$~bits/fm) is
 a dimensional-analysis cross-check consistent with QCD phenomenology
@@ -616,8 +632,8 @@ a dimensional-analysis cross-check consistent with QCD phenomenology
 or the fine structure constant from the Landauer framework.
 \item We do not modify QCD, QED, or general relativity.
 \item We do not claim that information storage ``causes'' forces.
-The source-dimension correspondence (Section~\ref{sec:storage_dim})
-is standard potential theory; the Landauer framing provides a
+The storage-dimension correspondence (Section~\ref{sec:storage_dim})
+follows from geometric scaling; the Landauer framing provides a
 thermodynamic interpretation but no dynamical mechanism.
 \item We do not claim that the near-coincidence
 $\mathcal{R}_L^{\mathrm{QCD}} \approx \mathcal{R}_L^{\mathrm{BH}}
