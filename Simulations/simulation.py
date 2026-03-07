@@ -390,7 +390,7 @@ def group3_casimir_rl():
     T_cross = hbar * c_light / (2 * np.pi * a_test * k_B)
     check("Casimir crossover T for a=1um",
           T_cross, 2*hbar*c_light/(4*np.pi*a_test*k_B), tol=0.01)
-    # T_cross ~ 1100 K for a = 1 micron
+    # T_cross ~ 365 K for a = 1 micron
 
     # Check 10: Casimir R_L classification: high-T is sub-Landauer (R_L < 1)
     # This contrasts with BH (R_L = 1) and QCD (R_L > 1)
@@ -472,7 +472,7 @@ def group4_bh_rl():
 
 
 # ============================================================
-# GROUP 5: R_L Classification Table (8 checks)
+# GROUP 5: R_L Classification Table (7 checks)
 # ============================================================
 def group5_classification():
     """
@@ -486,30 +486,26 @@ def group5_classification():
     print("\n  --- GROUP 5: R_L Classification Table ---")
 
     # System data: static R_L = U/(TS) values
-    # BH: Smarr relation Mc^2 = 2 T_H S_BH => R_L = 2
+    # BH: Smarr relation Mc^2 = 2 T_H S_BH => R_L = 2 (Schwarzschild only;
+    #     Kerr/RN have extra work terms OmegaJ, PhiQ in Smarr and are omitted)
     # Cosmo: Misner-Sharp E_MS = T S => R_L = 1
     # Photon gas: U = aVT^4, S = (4/3)aVT^3, TS = (4/3)U => R_L = 3/4
     systems = {
         'Schwarzschild BH': (2.0, 'super-Landauer'),
-        'Kerr BH': (2.0, 'super-Landauer'),
-        'Reissner-Nordstrom BH': (2.0, 'super-Landauer'),
-        'Rindler horizon': (2.0, 'super-Landauer'),
-        'Cosmological apparent': (1.0, 'saturating'),
+        'Cosmological apparent horizon': (1.0, 'saturating'),
         'Photon gas': (0.75, 'sub-Landauer'),
         'QCD at T_c (lattice)': (1.17, 'super-Landauer'),
         'QCD deep confinement': (2.16, 'super-Landauer'),
         'Casimir high-T': (0.0, 'sub-Landauer'),
     }
 
-    # Check 1-4: All gravitational horizons have static R_L = 2 (Smarr)
-    grav_systems = ['Schwarzschild BH', 'Kerr BH', 'Reissner-Nordstrom BH', 'Rindler horizon']
-    for s in grav_systems:
-        check(f"{s}: static R_L = 2 (Smarr)",
-              systems[s][0], 2.0, abs_tol=0.0)
+    # Check 1: Schwarzschild BH has static R_L = 2 (Smarr)
+    check("Schwarzschild BH: static R_L = 2 (Smarr)",
+          systems['Schwarzschild BH'][0], 2.0, abs_tol=0.0)
 
-    # Check 5: Cosmological is saturating (R_L = 1, Misner-Sharp)
+    # Check 2: Cosmological is saturating (R_L = 1, Misner-Sharp)
     check("Cosmological: R_L = 1 (saturating, Misner-Sharp)",
-          systems['Cosmological apparent'][0], 1.0, abs_tol=0.0)
+          systems['Cosmological apparent horizon'][0], 1.0, abs_tol=0.0)
 
     # Check 6: QCD at T_c is super-Landauer
     check("QCD at T_c: R_L > 1 (super-Landauer)",
@@ -537,10 +533,10 @@ def group5_classification():
     check("Photon gas: R_L = 3/4 (Stefan-Boltzmann)",
           R_L_photon, 0.75, tol=1e-10)
 
-    # Check 9: Ordering: QCD_deep > cosmo > photon > Casimir
+    # Check 7: Ordering: QCD_deep > cosmo > photon > Casimir
     check("Ordering: R_L(QCD_deep) > R_L(cosmo) > R_L(photon) > R_L(Casimir)",
           1.0 if (systems['QCD deep confinement'][0] >
-                  systems['Cosmological apparent'][0] >
+                  systems['Cosmological apparent horizon'][0] >
                   systems['Photon gas'][0] >
                   systems['Casimir high-T'][0]) else 0.0,
           1.0, abs_tol=0.0)
