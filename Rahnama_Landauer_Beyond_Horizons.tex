@@ -155,8 +155,6 @@ Section~\ref{sec:qcd} applies $\mathcal{R}_L^{\mathrm{stat}}$ to
 QCD flux tubes.
 Section~\ref{sec:casimir} treats the thermal Casimir effect.
 Section~\ref{sec:classification} presents the unified classification.
-Section~\ref{sec:string_tension} illustrates the framework with a
-dimensional-analysis estimate of the QCD string tension.
 Section~\ref{sec:perturbative} analyzes the perturbative high-$T$
 limit.
 Section~\ref{sec:scope} states what we do and do not claim.
@@ -260,6 +258,7 @@ $F_{\infty}/T_c$ & $\RLs$ \\
 
 \subsection{Results}
 
+Figure~\ref{fig:rl_qcd} plots $\RLs(T/T_c)$.
 Three features stand out:
 
 \begin{enumerate}
@@ -299,10 +298,36 @@ approaching saturation near $T_c$---is therefore robust across
 flavor content and quark masses.
 \end{enumerate}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_rl_qcd.pdf}
+\caption{Static Landauer ratio $\RLs = U/(TS)$ for QCD flux tubes
+as a function of $T/T_c$ (Kaczmarek--Zantow lattice data,
+$N_f = 2$, $T_c = 200$~MeV).
+Horizontal lines mark the Schwarzschild black hole ($\RLs = 2$,
+Smarr relation), cosmological apparent horizon ($\RLs = 1$,
+Misner--Sharp), and photon gas ($\RLs = 3/4$, Stefan--Boltzmann).
+The gray band indicates the deconfinement transition region.}
+\label{fig:rl_qcd}
+\end{figure}
+
 The free energy $F_{\infty}$ is positive below $T_c$ and decreasing
 above $T_c$, consistent with the standard picture: confinement
 requires positive free energy (work must be done to separate quarks),
 while above $T_c$ color screening reduces the separation cost.
+
+\textbf{Remark (string tension).}
+As a dimensional-analysis cross-check, identifying the source strength
+of a one-dimensional flux tube with the Landauer cost per bit gives
+$\sigma = k_B T_c \ln 2 \cdot \rho_{1D}$, where $\rho_{1D}$ is the
+information density along the tube.  Using $\sigma \approx 0.89$~GeV/fm
+yields $\rho_{1D} \approx 6.4$~bits/fm (at $T_c = 200$~MeV) or
+$\approx 8.3$~bits/fm (at $T_c = 155$~MeV).  Both exceed the bare
+color content $\log_2 3 \approx 1.58$~bits, which is expected since
+the flux tube also carries gluonic excitations.  This is not a
+derivation of $\sigma$---any ratio of two positive quantities with
+the same dimensions yields a positive number---but the result's
+consistency with QCD phenomenology is a useful sanity check.
 
 \subsection{Physical interpretation}
 
@@ -322,6 +347,12 @@ as a function of area ($M \propto A^{1/2}$, giving
 $M = 2\,\partial M/\partial S \cdot S = 2TS$); the QCD factor
 $\approx 2$ in deep confinement reflects the analogous energetic
 overhead of maintaining the chromoelectric string.
+However, convergence near $\RLs = 2$ need not imply a dynamical
+link: the Schwarzschild value is fixed by the Euler degree of the
+area-law entropy, while the QCD value is a lattice-dependent number
+that will shift with $N_f$ and quark masses, so the proximity may be
+a coincidence of scaling exponents rather than evidence for a shared
+mechanism.
 
 
 % ============================================================
@@ -488,63 +519,6 @@ where no process is involved.
 
 
 % ============================================================
-\section{Dimensional-analysis illustration: QCD string tension}
-\label{sec:string_tension}
-
-A one-dimensional source (flux tube) produces a constant force,
-i.e., a linear potential $\Phi(r) = \sigma r$ with string tension
-$\sigma$.  Identifying the source strength with the Landauer
-maintenance cost per bit relates $\sigma$ to the information density
-along the tube:
-\begin{equation}
-\label{eq:sigma_landauer}
-\sigma = k_B T_c \ln 2 \;\cdot\; \rho_{1D},
-\end{equation}
-where $\rho_{1D}$ is the number of bits per unit length stored in
-the flux tube at the deconfinement scale $T_c$.
-
-Using the standard lattice value $\sigma \approx 0.89$~GeV/fm and
-the Kaczmarek--Zantow $T_c = 200$~MeV:
-\begin{equation}
-\rho_{1D} = \frac{\sigma}{T_c \ln 2}
-= \frac{0.89}{0.200 \times 0.693}
-\approx 6.4~\text{bits/fm}.
-\end{equation}
-
-With the modern (2+1)-flavor value $T_c = 155$~MeV:
-\begin{equation}
-\rho_{1D} \approx \frac{0.89}{0.155 \times 0.693}
-\approx 8.3~\text{bits/fm}.
-\end{equation}
-
-These values exceed the bare color content of a quark
-($\log_2 3 \approx 1.58$~bits), which is expected: the flux tube
-carries not only color quantum numbers but also gluonic excitations
-that contribute additional information content.
-
-As a cross-check, the L\"uscher correction to the string tension
-from bosonic string fluctuations is~\cite{Luscher2002}
-\begin{equation}
-\sigma_{\mathrm{eff}}(r) = \sigma - \frac{\pi \hbar c}{12\, r^2}.
-\end{equation}
-At $r = 1$~fm, $\pi \hbar c / 12 \approx 0.052$~GeV$\cdot$fm,
-giving a correction of order $6\%$ of $\sigma$, consistent with the
-flux tube being a physical one-dimensional object whose
-information content is dominated by the zeroth-order string tension.
-
-We emphasize that Eq.~\eqref{eq:sigma_landauer} is not a derivation
-of $\sigma$ from the Landauer framework.  It is a dimensional-analysis
-illustration: given the measured string tension and critical
-temperature, the implied information density is a positive number of
-order unity in natural units (a few bits per fermi, exceeding the bare
-color content).  Any ratio of two positive physical quantities with
-the same dimensions yields a positive number; the value becomes
-informative only insofar as it is comparable to independently
-motivated scales (here, the color content $\log_2 3 \approx 1.58$
-bits).
-
-
-% ============================================================
 \section{Perturbative high-temperature limit}
 \label{sec:perturbative}
 
@@ -632,7 +606,8 @@ $\RLs \approx 2.16$ close to the Schwarzschild value of 2.
 dimension and force law ($F \sim r^{d-2}$) admits a Landauer
 interpretation but is not derived from information theory.
 \item The implied flux-tube information density ($6$--$8$~bits/fm) is
-a dimensional-analysis illustration consistent with QCD phenomenology.
+a dimensional-analysis cross-check consistent with QCD phenomenology
+(see the remark in Section~\ref{sec:qcd}).
 \end{enumerate}
 
 \textbf{What we do not claim:}

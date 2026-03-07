@@ -19,6 +19,9 @@ __pycache__/
 # Archive of old versions
 archive/
 
+# Generated figures (PNG; PDF kept for LaTeX)
+*.png
+
 # Editor
 *.swp
 *.swo
