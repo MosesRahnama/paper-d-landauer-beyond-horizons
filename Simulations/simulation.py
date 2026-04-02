@@ -730,6 +730,98 @@ def group8_cross_consistency():
 
 
 # ============================================================
+# GROUP 9: Bazavov (2+1)-Flavor R_L Verification (10 checks)
+# ============================================================
+def group9_bazavov_rl():
+    """
+    Verify the R_L values computed from Bazavov et al. (2016)
+    continuum-extrapolated single-quark free energy and entropy
+    (Table XIII of arXiv:1603.06637).
+
+    U_Q = F_Q + T * S_Q,   R_L = U_Q / (T * S_Q)
+    """
+    print("\n  --- GROUP 9: Bazavov (2+1)-Flavor R_L ---")
+
+    # Data from Bazavov et al. Table XIII (continuum-extrapolated)
+    # Columns: T [MeV], F_Q [MeV], S_Q (dimensionless)
+    T_c = 155.0  # MeV, chiral crossover
+    bazavov = np.array([
+        [125, 481, 1.99],
+        [140, 446, 2.78],
+        [155, 395, 3.67],
+        [160, 377, 3.47],
+        [200, 268, 2.15],
+        [300, 121, 1.07],
+        [400,  34, 0.75],
+        [500, -32, 0.60],
+    ])
+    T_MeV = bazavov[:, 0]
+    F_Q    = bazavov[:, 1]
+    S_Q    = bazavov[:, 2]
+
+    U_Q = F_Q + T_MeV * S_Q
+    TS_Q = T_MeV * S_Q
+    R_L = U_Q / TS_Q
+
+    # Paper Table values (from tex)
+    R_L_paper = np.array([2.93, 2.15, 1.69, 1.68, 1.62, 1.38, 1.11, 0.89])
+    U_Q_paper = np.array([730, 835, 964, 932, 698, 442, 334, 268])
+
+    # Check 1: U_Q arithmetic (U = F + TS) for all 8 rows
+    check("Bazavov U_Q = F_Q + T*S_Q (max residual)",
+          np.max(np.abs(U_Q - U_Q_paper)), 0.0, abs_tol=1.5)
+
+    # Check 2: R_L values match paper table (within rounding)
+    check("Bazavov R_L matches paper table (max deviation)",
+          np.max(np.abs(R_L - R_L_paper)), 0.0, abs_tol=0.015)
+
+    # Check 3: R_L > 1 for all T <= 400 MeV
+    confined_mask = T_MeV <= 400
+    check("Bazavov R_L > 1 for T <= 400 MeV",
+          1.0 if np.all(R_L[confined_mask] > 1.0) else 0.0,
+          1.0, abs_tol=0.0)
+
+    # Check 4: R_L < 1 at T = 500 MeV (sub-Landauer above crossover)
+    check("Bazavov R_L < 1 at T = 500 MeV",
+          1.0 if R_L[-1] < 1.0 else 0.0, 1.0, abs_tol=0.0)
+
+    # Check 5: Minimum R_L near T_c (between 150 and 170 MeV)
+    near_Tc = (T_MeV >= 150) & (T_MeV <= 170)
+    R_L_min_near = np.min(R_L[near_Tc])
+    check("Bazavov R_L minimum near T_c ~ 1.68",
+          R_L_min_near, 1.68, tol=0.02)
+
+    # Check 6: Deep confinement R_L ~ 2.93
+    check("Bazavov deep confinement R_L ~ 2.93",
+          R_L[0], 2.93, tol=0.01)
+
+    # Check 7: R_L decreases from deep confinement toward T_c
+    check("Bazavov R_L(125 MeV) > R_L(155 MeV)",
+          1.0 if R_L[0] > R_L[2] else 0.0, 1.0, abs_tol=0.0)
+
+    # Check 8: Cluster decomposition: pair ratio = single-quark ratio
+    # F_inf = 2*F_Q, S_inf = 2*S_Q -> U_inf = 2*U_Q, TS_inf = 2*TS_Q
+    # R_L_pair = (2*U_Q) / (2*TS_Q) = U_Q/TS_Q = R_L_single
+    R_L_pair = (2 * U_Q) / (2 * TS_Q)
+    check("Cluster decomposition: pair R_L = single R_L",
+          np.max(np.abs(R_L_pair - R_L)), 0.0, abs_tol=1e-14)
+
+    # NEGATIVE TESTS
+    # Check 9: Wrong normalization (shift F_Q by 100 MeV) changes R_L
+    F_Q_shifted = F_Q + 100.0
+    U_Q_shifted = F_Q_shifted + T_MeV * S_Q
+    R_L_shifted = U_Q_shifted / TS_Q
+    check("NEGATIVE: shifting F_Q by 100 MeV changes R_L",
+          R_L_shifted[2], R_L[2], tol=0.01, negative=True)
+
+    # Check 10: R_L at 155 MeV should NOT equal 1 (still super-Landauer)
+    check("NEGATIVE: Bazavov R_L(T_c) != 1",
+          R_L[2], 1.0, tol=0.01, negative=True)
+
+    print_group_summary(9)
+
+
+# ============================================================
 # UTILITIES
 # ============================================================
 group_count = {}
@@ -768,6 +860,7 @@ def main():
     group6_string_tension()
     group7_perturbative_limit()
     group8_cross_consistency()
+    group9_bazavov_rl()
 
     total = PASS + FAIL
     print()

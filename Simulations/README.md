@@ -6,7 +6,7 @@ Moses Rahnama (2026)
 
 ## Overview
 
-This repository contains the companion simulation for Paper D of the Landauer saturation trilogy. The simulation performs 70 independent falsifiable checks across 8 groups, verifying every quantitative claim in the manuscript.
+This repository contains the companion simulation for Paper D of the Landauer saturation trilogy. The simulation performs 80 independent falsifiable checks across 9 groups, verifying every quantitative claim in the manuscript.
 
 The static Landauer ratio is defined as
 
@@ -36,6 +36,7 @@ where $U$ is the total internal energy, $T$ the temperature, and $S$ the entropy
 6. **QCD string tension** (6 checks): Dimensional-analysis illustration
 7. **Perturbative high-$T$ limit** (6 checks): Asymptotic freedom and $\mathcal{R}_L^{\mathrm{stat}} \to 0$
 8. **Cross-consistency with Papers A, B, C** (6 checks): Trilogy coherence
+9. **Bazavov (2+1)-flavor $\mathcal{R}_L^{\mathrm{stat}}$** (10 checks): Arithmetic verification of Table~\ref{tab:bazavov_rl}, monotonic decrease, super-Landauer for $T \leq 400$~MeV, sub-Landauer crossover at $T = 500$~MeV
 
 ## Running
 
@@ -43,7 +44,7 @@ where $U$ is the total internal energy, $T$ the temperature, and $S$ the entropy
 python simulation.py
 ```
 
-All 70 checks should report `[OK]`. No external dependencies beyond NumPy.
+All 80 checks should report `[OK]`. No external dependencies beyond NumPy.
 
 ## Relation to the trilogy
 
